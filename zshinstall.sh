@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "alias mplay='source ~/RmSeach/MSearch.sh'" >> ~/.zshrc
+echo "alias mplay='source ~/RmSearch/MSearch.sh'  " >> ~/.zshrc
