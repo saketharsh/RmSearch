@@ -2,35 +2,37 @@
 
 
 ########################################################
-# Bash script to match song name across computer       # 
+# Bash script to match MP3 song name across computer   # 
 # and play it with suitable player                     #
-# Copyright- Saket Harsh   (IIT Kanpur)                #
+# Copyright- Saket Harsh   (IIT Kanpur)                # 
+# E-Mail- sharsh2010@gmail.com                         #
 ########################################################
+
 cd ~
 
-echo "Enter the name of Song  you wanna play:- \n "
+echo "Enter the name of Song  you wanna play:-  "
 
 read name
 count=0
 while [ $count -eq 0 ]
 do
-	count=$(  ls *  | grep -c -i "$name")
+	count=$(  ls -R  | grep -c -i "$name")
 	if [ $count -eq 0 ] 
 		then
 
 		echo "No such Song found. Try with another name:- \n "
 		read name
-		count=$(  ls *  | grep -c -i "$name")
+		count=$(  ls -R  | grep -c -i "$name")
 	elif [ $count \> 1 ]
 		then
-		a=$(  ls * |grep -i  "$name" )
+		a=$(  ls -R |grep -i  "$name" )
 		echo "Multiple File names found. Select any one from the listed below:-"
 		echo "$a"
 		echo " Be more specific :-"
 		read name
-		count=$(  ls *  | grep -c -i "$name")
+		count=$(  ls -R  | grep -c -i "$name")
 	else
-		a=$( ls * |grep -i  "$name" )
+		a=$( ls -R |grep -i  "$name" )
 		cd ~/RmSearch/
 		echo "$a" > songlist.txt
 	fi
