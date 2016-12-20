@@ -16,29 +16,29 @@ read name
 count=0
 while [ $count -eq 0 ]
 do
-	count=$(  ls -R  | grep -c -i "$name")
-	if [ $count -eq 0 ] 
-		then
-
+	count=$( ls -R  | grep -c -i "$name")
+	while [ $count -eq 0 ]
+	do
 		echo "No such Song found. Try with another name:- \n "
 		read name
 		count=$(  ls -R  | grep -c -i "$name")
-	elif [ $count \> 1 ]
-		then
+	done
+
+	while [ $count -gt 1 ]
+	do
 		a=$(  ls -R |grep -i  "$name" )
 		echo "Multiple File names found. Select any one from the listed below:-"
 		echo "$a"
 		echo " Be more specific :-"
 		read name
 		count=$(  ls -R  | grep -c -i "$name")
-	else
+	done
 		a=$( ls -R |grep -i  "$name" )
 		cd ~/RmSearch/
 		echo "$a" > songlist.txt
-	fi
-
 
 done
+
 
 cd ~/RmSearch/
 ./EXT-manager.py
@@ -53,8 +53,9 @@ if [ "$(cat songlist2.txt)" ]
 	cd ~
 	vlc "$fullpath"
 else
-	echo "The file recognized is not and mp3 file.... Exiting!!"
+	echo "The file either does not exist or  is not and mp3 file.... Exiting!!"
 fi
+
 
 
 
