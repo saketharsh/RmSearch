@@ -8,43 +8,41 @@
 # E-Mail- sharsh2010@gmail.com                         #
 ########################################################
 
+
 cd ~
 
-echo "Enter the name of Song  you wanna play:-  "
 
-read name
+name="$1"
 count=0
 while [ $count -eq 0 ]
 do
-	count=$( ls -R  | grep -c -i "$name")
+	count=$( ls -R  | egrep   ".mp3$" | grep -i -c "$name")
 	while [ $count -eq 0 ]
 	do
-		echo "No such Song found. Try with another name:- \n "
+		echo "No such .mp3 Song found. Try with another name:- \n "
 		read name
-		count=$(  ls -R  | grep -c -i "$name")
+		count=$(  ls -R  | egrep ".mp3$" | grep -i -c "$name")
 	done
 
 	while [ $count -gt 1 ]
 	do
-		a=$(  ls -R |grep -i  "$name" )
+		a=$(  ls -R | egrep  ".mp3$" | grep -i "$name" )
 		echo "Multiple File names found. Select any one from the listed below:-"
 		echo "$a"
 		echo " Be more specific :-"
 		read name
-		count=$(  ls -R  | grep -c -i "$name")
+		count=$(  ls -R  | egrep ".mp3$" | grep -i -c "$name" )
 	done
-		a=$( ls -R |grep -i  "$name" )
+		a=$( ls -R | egrep ".mp3$" | grep -i  "$name" )
 		cd ~/RmSearch/
-		echo "$a" > songlist.txt
 
 done
 
 
 cd ~/RmSearch/
-./EXT-manager.py
+./EXT-manager.py "$a"
 
 
-echo ""
 if [ "$(cat songlist2.txt)" ]
 	then
 	fullpath=$(cat songlist2.txt)
